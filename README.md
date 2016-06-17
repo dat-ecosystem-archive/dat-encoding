@@ -19,7 +19,12 @@ console.log('%s -> %s', encoded, encoding.decode(encoded))
 ## API
 
 ### .encode(buf)
+
+Encode `buf` into a string that works well in urls.
+
 ### .decode(str)
+
+Decode `str` into its binary representation. If `str` is a 64 character legacy link, simply applies base64 decoding.
 
 ## License
 
