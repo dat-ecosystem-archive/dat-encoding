@@ -3,6 +3,8 @@
 
 [Dat](http://dat-data.com/)'s way of encoding and decoding dat links. Pretty similar to base36!
 
+[![Build Status](https://travis-ci.org/juliangruber/dat-encoding.svg?branch=master)](https://travis-ci.org/juliangruber/dat-encoding)
+
 ## Example
 
 ```js
