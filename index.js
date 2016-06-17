@@ -12,5 +12,6 @@ exports.encode = function (buf) {
 }
 
 exports.decode = function (str) {
+  if (str.length === 64) return Buffer.from(str, 'hex')
   return Buffer.from(encoding.decode(str))
 }

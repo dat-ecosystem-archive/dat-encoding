@@ -11,6 +11,13 @@ test('encode', function (t) {
 test('decode', function (t) {
   t.ok(Buffer.isBuffer(enc.decode('42n3t')))
   t.deepEqual(enc.decode('42n3t'), Buffer('hey'))
+
+  var legacy = {
+    raw: Buffer('abcdabcdbacdbacdbacdbacdbacdbacd'),
+    encoded: '6162636461626364626163646261636462616364626163646261636462616364'
+  }
+  t.deepEqual(enc.decode(legacy.encoded), legacy.raw, 'legacy hex encoding')
+
   t.end()
 })
 
