@@ -1,7 +1,7 @@
 
 # dat-encoding
 
-Dat's way of encoding and decoding dat links. Pretty similar to base36!
+[Dat](http://dat-data.com/)'s way of encoding and decoding dat links. Pretty similar to base36!
 
 ## Example
 
