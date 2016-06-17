@@ -24,7 +24,7 @@ Encode `buf` into a string that works well in urls.
 
 ### .decode(str)
 
-Decode `str` into its binary representation. If `str` is a 64 character legacy link, simply applies base64 decoding.
+Decode `str` into its binary representation. If `str` is a 64 character legacy link, simply applies hex decoding.
 
 ## License
 
