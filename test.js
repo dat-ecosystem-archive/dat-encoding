@@ -11,6 +11,9 @@ test('encode', function (t) {
 test('decode', function (t) {
   t.ok(Buffer.isBuffer(enc.decode('42n3t')))
   t.deepEqual(enc.decode('42n3t'), Buffer('hey'))
+  t.deepEqual(enc.decode('http://dat.lin/42n3t'), Buffer('hey'))
+  t.deepEqual(enc.decode('https://dat.lin/42n3t'), Buffer('hey'))
+  t.deepEqual(enc.decode('dat://42n3t'), Buffer('hey'))
 
   var legacy = {
     raw: Buffer('abcdabcdbacdbacdbacdbacdbacdbacd'),
