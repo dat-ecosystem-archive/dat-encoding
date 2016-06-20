@@ -1,6 +1,6 @@
 var encoding = require('.')
 
-var input = 'quite rad'
-var encoded = encoding.encode(input)
-console.log('%s -> %s', input, encoded)
-console.log('%s -> %s', encoded, encoding.decode(encoded))
+var link = '2fdiu7i6kpzx4h9qos6eqldjghd2ut5hx0e8bekm0bkwiax3dt'
+var buf = encoding.decode(link)
+console.log('%s -> %s', link, buf)
+console.log('%s -> %s', buf, encoding.encode(buf))
