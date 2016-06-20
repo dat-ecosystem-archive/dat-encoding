@@ -20,11 +20,11 @@ console.log('%s -> %s', buf, encoding.encode(buf))
 
 ### .encode(buf)
 
-Encode `buf` into a string that works well in urls.
+Encode `buf` into a string that works well in urls. Throws if `buf` isn't 32 bytes of length. 
 
 ### .decode(str)
 
-Decode `str` into its binary representation. If `str` is a 64 character legacy link, simply applies hex decoding. Also supports `dat://` and `dat.com/` links.
+Decode `str` into its binary representation. If `str` is a 64 character legacy link, simply applies hex decoding. Also supports `dat://` and `dat.com/` links. Throws if the raw link isn't 64 bytes of base64 or 50 bytes of base36.
 
 ## License
 
