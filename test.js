@@ -51,5 +51,9 @@ test('integration', function (t) {
 
   input = Buffer('0900000001000000561ce777010000009082e70001000000bf000000ffffffff', 'hex')
   t.deepEqual(enc.decode(enc.encode(input)), input)
+
+  input = Buffer(32)
+  t.deepEqual(enc.decode(enc.encode(input)), input)
+
   t.end()
 })
