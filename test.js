@@ -6,7 +6,7 @@ test('encode', function (t) {
   t.equal(enc.encode(Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')), '2fdiu7i6kpzx4h9qos6eqldjghd2ut5hx0e8bekm0bkwiax3dt')
   t.equal(enc.encode('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'), '2fdiu7i6kpzx4h9qos6eqldjghd2ut5hx0e8bekm0bkwiax3dt')
   t.throws(function () { enc.encode('tooshort') })
-  t.equal(enc.encode(Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')), 'waum9lsz88rt2zltcysggj4yc0odk8uwwrq05shegvktfgu8--')
+  t.equal(enc.encode(Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')), '00waum9lsz88rt2zltcysggj4yc0odk8uwwrq05shegvktfgu8')
   t.end()
 })
 
@@ -38,7 +38,7 @@ test('decode', function (t) {
   t.throws(function () { enc.decode('too short') })
 
   t.deepEqual(
-    enc.decode('waum9lsz88rt2zltcysggj4yc0odk8uwwrq05shegvktfgu8--'),
+    enc.decode('00waum9lsz88rt2zltcysggj4yc0odk8uwwrq05shegvktfgu8'),
     Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')
   )
 
