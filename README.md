@@ -18,9 +18,11 @@ console.log('%s -> %s', buf, encoding.encode(buf))
 
 ## API
 
-### .encode(buf)
+### .encode(buf[, opts])
 
-Encode `buf` into a string that works well in urls. Throws if `buf` isn't 32 bytes of length. 
+Encode `buf` into a string that works well in urls. Throws if `buf` isn't 32 bytes of length.
+
+Pass `legacy: true` to create an old style hex encoded link.
 
 ### .decode(str)
 

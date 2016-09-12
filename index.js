@@ -6,9 +6,10 @@ var Buffer = require('safe-buffer').Buffer
 var alphabet = '0123456789abcdefghijklmnopqrstuvwxyz'
 var encoding = baseX(alphabet)
 
-exports.encode = function (buf) {
+exports.encode = function (buf, opts) {
   if (buf.length !== 32) throw new Error('Invalid buffer')
   buf = Buffer.from(buf)
+  if (opts && opts.legacy) return buf.toString('hex')
   var str = encoding.encode(buf)
   while (str.length < 50) str = '0' + str
   return str
