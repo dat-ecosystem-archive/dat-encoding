@@ -5,7 +5,6 @@
   "repository": "juliangruber/dat-encoding",
   "description": "Encode and decode Dat links",
   "dependencies": {
-    "base-x": "^1.0.4",
     "safe-buffer": "^5.0.1"
   },
   "devDependencies": {
