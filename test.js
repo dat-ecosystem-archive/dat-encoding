@@ -29,7 +29,8 @@ test('decode', function (t) {
     Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
   )
 
-  t.throws(function () { enc.decode('too short') })
+  t.throws(function () { enc.decode('100') }) // too short
+  t.throws(function () { enc.decode('invalid characters') })
 
   t.deepEqual(
     enc.decode('0100000000000000ffffffff0000000000008004010000004012800201000000'),
