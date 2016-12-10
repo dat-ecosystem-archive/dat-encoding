@@ -8,7 +8,7 @@ exports.encode = function (buf, opts) {
 }
 
 exports.decode = function (str) {
-  str = str.slice(str.lastIndexOf('/') + 1)
-  if (str.length !== 64) throw new Error('Invalid key')
-  return Buffer.from(str, 'hex')
+  var match = /(?:[a-z]+:\/\/(?:dat\.land\/)?)?([^/]{64})/.exec(str)
+  if (!match) throw new Error('Invalid key')
+  return Buffer.from(match[1], 'hex')
 }

@@ -28,6 +28,10 @@ test('decode', function (t) {
     enc.decode('dat://6161616161616161616161616161616161616161616161616161616161616161'),
     Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
   )
+  t.deepEqual(
+    enc.decode('dat://6161616161616161616161616161616161616161616161616161616161616161/'),
+    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+  )
 
   t.throws(function () { enc.decode('100') }) // too short
   t.throws(function () { enc.decode('invalid characters') })
