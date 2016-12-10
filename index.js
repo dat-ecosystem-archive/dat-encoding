@@ -8,6 +8,7 @@ exports.encode = function (buf, opts) {
 }
 
 exports.decode = function (str) {
+  str = str.replace(/\/$/, '')
   str = str.slice(str.lastIndexOf('/') + 1)
   if (str.length !== 64) throw new Error('Invalid key')
   return Buffer.from(str, 'hex')
