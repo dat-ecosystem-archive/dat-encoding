@@ -1,6 +1,6 @@
 {
   "name": "dat-encoding",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "license": "MIT",
   "repository": "juliangruber/dat-encoding",
   "description": "Encode and decode Dat links",
