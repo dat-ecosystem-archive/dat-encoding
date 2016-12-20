@@ -4,9 +4,9 @@ var enc = require('./')
 test('encode', function (t) {
   t.equal(typeof enc.encode(Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')), 'string')
   t.equal(enc.encode(Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')), '6161616161616161616161616161616161616161616161616161616161616161')
-  t.equal(enc.encode('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'), '6161616161616161616161616161616161616161616161616161616161616161')
   t.throws(function () { enc.encode('tooshort') })
   t.equal(enc.encode(Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')), '0100000000000000ffffffff0000000000008004010000004012800201000000')
+  t.equal(enc.encode, enc.toBuf)
   t.end()
 })
 
@@ -40,6 +40,8 @@ test('decode', function (t) {
     enc.decode('0100000000000000ffffffff0000000000008004010000004012800201000000'),
     Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')
   )
+
+  t.equal(enc.decode, enc.toStr)
 
   t.end()
 })
