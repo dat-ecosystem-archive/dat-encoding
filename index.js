@@ -15,5 +15,5 @@ function decode (str) {
   return Buffer.from(match[1], 'hex')
 }
 
-exports.encode = exports.toBuf = encode
-exports.decode = exports.toStr = decode
+exports.encode = exports.toStr = encode
+exports.decode = exports.toBuf = decode

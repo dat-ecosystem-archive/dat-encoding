@@ -1,47 +1,54 @@
 var test = require('tape')
 var enc = require('./')
 
+var keys = [
+  {type: 'valid', key: '6161616161616161616161616161616161616161616161616161616161616161'},
+  {type: 'valid', key: new Buffer('6161616161616161616161616161616161616161616161616161616161616161', 'hex')},
+  {type: 'valid', key: 'dat://6161616161616161616161616161616161616161616161616161616161616161'},
+  {type: 'valid', key: 'dat.land/6161616161616161616161616161616161616161616161616161616161616161'},
+  {type: 'valid', key: 'dat://6161616161616161616161616161616161616161616161616161616161616161/'},
+  {type: 'valid', key: 'dat.land/6161616161616161616161616161616161616161616161616161616161616161/'},
+  {type: 'invalid', key: new Buffer('key-me-maybe', 'hex')},
+  {type: 'invalid', key: 'key-me-maybe'},
+  {type: 'invalid', key: null}
+]
+
 test('encode', function (t) {
-  t.equal(typeof enc.encode(Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')), 'string')
-  t.equal(enc.encode(Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')), '6161616161616161616161616161616161616161616161616161616161616161')
-  t.throws(function () { enc.encode('tooshort') })
-  t.equal(enc.encode(Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')), '0100000000000000ffffffff0000000000008004010000004012800201000000')
-  t.equal(enc.encode, enc.toBuf)
+  keys.forEach(function (key) {
+    if (key.type === 'invalid') {
+      t.throws(function () { enc.encode(key.key) }, 'invalid key throws error')
+    } else if (key.type === 'valid') {
+      var newKey = enc.encode(key.key)
+      t.equal(newKey, '6161616161616161616161616161616161616161616161616161616161616161')
+      t.equal(typeof newKey, 'string')
+      t.ok(enc.decode(newKey), 'valid key is now valid str')
+    }
+  })
+
+  t.equal(enc.encode, enc.toStr)
   t.end()
 })
 
 test('decode', function (t) {
-  t.ok(Buffer.isBuffer(enc.decode('6161616161616161616161616161616161616161616161616161616161616161')))
-  t.deepEqual(
-    enc.decode('6161616161616161616161616161616161616161616161616161616161616161'),
-    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-  )
-  t.deepEqual(
-    enc.decode('http://dat.land/6161616161616161616161616161616161616161616161616161616161616161'),
-    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-  )
-  t.deepEqual(
-    enc.decode('https://dat.land/6161616161616161616161616161616161616161616161616161616161616161'),
-    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-  )
-  t.deepEqual(
-    enc.decode('dat://6161616161616161616161616161616161616161616161616161616161616161'),
-    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-  )
-  t.deepEqual(
-    enc.decode('dat://6161616161616161616161616161616161616161616161616161616161616161/'),
-    Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-  )
+  keys.forEach(function (key) {
+    if (key.type === 'invalid') {
+      t.throws(function () { enc.decode(key.key) }, 'invalid key throws error')
+    } else if (key.type === 'valid') {
+      var newKey = enc.decode(key.key)
+      t.deepEqual(
+        newKey,
+        Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      )
+      t.deepEqual(
+        newKey,
+        Buffer('6161616161616161616161616161616161616161616161616161616161616161', 'hex')
+      )
+      t.ok(Buffer.isBuffer(newKey), 'buffer a is buffer')
+      t.ok(enc.encode(newKey), 'valid key is now valid buffer')
+    }
+  })
 
-  t.throws(function () { enc.decode('100') }) // too short
-  t.throws(function () { enc.decode('invalid characters') })
-
-  t.deepEqual(
-    enc.decode('0100000000000000ffffffff0000000000008004010000004012800201000000'),
-    Buffer('0100000000000000ffffffff0000000000008004010000004012800201000000', 'hex')
-  )
-
-  t.equal(enc.decode, enc.toStr)
+  t.equal(enc.decode, enc.toBuf)
 
   t.end()
 })
@@ -55,6 +62,35 @@ test('integration', function (t) {
 
   input = Buffer(32)
   t.deepEqual(enc.decode(enc.encode(input)), input)
+
+  t.end()
+})
+
+test('toStr', function (t) {
+  keys.forEach(function (key) {
+    if (key.type === 'valid') {
+      var newKey = enc.toStr(key.key)
+      t.equal(newKey, '6161616161616161616161616161616161616161616161616161616161616161')
+      t.equal(typeof newKey, 'string')
+      t.ok(enc.decode(newKey), 'valid key is now valid buf')
+    }
+  })
+
+  t.end()
+})
+
+test('toBuf', function (t) {
+  keys.forEach(function (key) {
+    if (key.type === 'valid') {
+      var newKey = enc.toBuf(key.key)
+      t.deepEqual(
+        newKey,
+        Buffer('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+      )
+      t.ok(Buffer.isBuffer(newKey), 'buffer a is buffer')
+      t.ok(enc.encode(newKey), 'valid key is now valid buffer')
+    }
+  })
 
   t.end()
 })
