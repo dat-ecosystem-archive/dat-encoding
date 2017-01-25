@@ -8,6 +8,7 @@ var keys = [
   {type: 'valid', key: 'dat.land/6161616161616161616161616161616161616161616161616161616161616161'},
   {type: 'valid', key: 'dat://6161616161616161616161616161616161616161616161616161616161616161/'},
   {type: 'valid', key: 'dat.land/6161616161616161616161616161616161616161616161616161616161616161/'},
+  {type: 'valid', key: 'host.com/whatever/6161616161616161616161616161616161616161616161616161616161616161'},
   {type: 'invalid', key: new Buffer('key-me-maybe', 'hex')},
   {type: 'invalid', key: 'key-me-maybe'},
   {type: 'invalid', key: null}
