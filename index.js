@@ -12,8 +12,8 @@ function encode (buf) {
 function decode (str) {
   if (Buffer.isBuffer(str)) return decode(encode(str))
   if (typeof str !== 'string') throw new Error('Not a string')
-  var match = /\/?([^/]{64})/.exec(str)
-  if (!match) throw new Error('Invalid key')
+  var match = /\/?([^/]{64,65})/.exec(str)
+  if (!match || match[1].length !== 64) throw new Error('Invalid key')
   return Buffer.from(match[1], 'hex')
 }
 
