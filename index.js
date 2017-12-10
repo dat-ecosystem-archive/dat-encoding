@@ -12,7 +12,9 @@ function encode (buf) {
 function decode (str) {
   if (Buffer.isBuffer(str)) return decode(encode(str))
   if (typeof str !== 'string') throw new Error('Not a string')
-  var match = /\/?([a-f0-9]{64,65})/i.exec(str)
+  // looking for an hexa string of 64 or 65 consecutive chars
+  var match = /([a-f0-9]{64,65})/i.exec(str)
+  // we need exactly 64, so an hexa string with 65 chars (or more) is not allowed
   if (!match || match[1].length !== 64) throw new Error('Invalid key')
   return Buffer.from(match[1], 'hex')
 }
