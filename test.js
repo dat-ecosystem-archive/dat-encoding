@@ -81,7 +81,7 @@ test('toStr', function (t) {
       var newKey = enc.toStr(key.key)
       t.equal(newKey, '6161616161616161616161616161616161616161616161616161616161616161')
       t.equal(typeof newKey, 'string')
-      t.ok(enc.decode(newKey), 'valid key is now valid buf')
+      t.ok(enc.decode(newKey), 'valid key is now valid buffer')
     }
   })
 
@@ -105,17 +105,15 @@ test('toBuf', function (t) {
 })
 
 test('toStr with path', function (t) {
-  t.plan(3)
+  t.plan(2)
   var newKey = enc.toStr('3161616161616161616161616161616161616161616161616161616161616161/path')
   t.equal(newKey, '3161616161616161616161616161616161616161616161616161616161616161')
-  t.equal(typeof newKey, 'string')
-  t.ok(enc.decode(newKey), 'valid key is now valid buf')
+  t.ok(enc.decode(newKey), 'valid key is now valid buffer')
 })
 
 test('toStr with version', function (t) {
-  t.plan(3)
+  t.plan(2)
   var newKey = enc.toStr('4161616161616161616161616161616161616161616161616161616161616161+5')
   t.equal(newKey, '4161616161616161616161616161616161616161616161616161616161616161')
-  t.equal(typeof newKey, 'string')
-  t.ok(enc.decode(newKey), 'valid key is now valid buf')
+  t.ok(enc.decode(newKey), 'valid key is now valid buffer')
 })
