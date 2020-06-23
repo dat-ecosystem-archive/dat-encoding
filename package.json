@@ -4,9 +4,7 @@
   "license": "MIT",
   "repository": "juliangruber/dat-encoding",
   "description": "Encode and decode Dat links",
-  "dependencies": {
-    "safe-buffer": "^5.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "standard": "^9.0.0",
     "tape": "^4.5.1"
