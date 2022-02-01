@@ -1,7 +1,5 @@
 'use strict'
 
-var Buffer = require('safe-buffer').Buffer
-
 function encode (buf) {
   if (typeof buf === 'string') return encode(decode(buf))
   if (!Buffer.isBuffer(buf)) throw new Error('Not a buffer')
